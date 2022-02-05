@@ -1,0 +1,453 @@
+<HtML>
+
+<head>
+    <title>SuperTronico</title>
+    <!--- Función JS que llamas luego en body, los EVENTOS-->
+    <script>
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function image() {
+            var img = document.createElement("img");
+            img.src = "https://www.spriters-resource.com/resources/sheet_icons/40/42384.png";
+            var src = document.getElementById("tank");
+            src.appendChild(img);
+        }
+
+        function image1() {
+            var img = document.createElement("img");
+            img.src = "./alien1.gif";
+            var src = document.getElementById("alien1");
+            src.appendChild(img);
+        }
+        function image2() {
+            var img = document.createElement("img");
+            img.src = "./alien1.gif";
+            var src = document.getElementById("alien2");
+            src.appendChild(img);
+        }
+        function image3() {
+            var img = document.createElement("img");
+            img.src = "./alien1.gif";
+            var src = document.getElementById("alien3");
+            src.appendChild(img);
+        }
+        function image4() {
+            var img = document.createElement("img");
+            img.src = "./alien1.gif";
+            var src = document.getElementById("alien4");
+            src.appendChild(img);
+        }
+        function image5() {
+            var img = document.createElement("img");
+            img.src = "./alien1.gif";
+            var src = document.getElementById("alien5");
+            src.appendChild(img);
+        }
+        function image6() {
+            var img = document.createElement("img");
+            img.src = "./alien1.gif";
+            var src = document.getElementById("alien6");
+            src.appendChild(img);
+        }
+        function image7() {
+            var img = document.createElement("img");
+            img.src = "./alien2.gif";
+            var src = document.getElementById("alien7");
+            src.appendChild(img);
+        }
+        function image8() {
+            var img = document.createElement("img");
+            img.src = "./alien2.gif";
+            var src = document.getElementById("alien8");
+            src.appendChild(img);
+        }
+        function image9() {
+            var img = document.createElement("img");
+            img.src = "./alien2.gif";
+            var src = document.getElementById("alien9");
+            src.appendChild(img);
+        }
+
+        function image10() {
+            var img = document.createElement("img");
+            img.src = "./Boss.gif";
+            var src = document.getElementById("alienBoss");
+            src.appendChild(img);
+        }
+
+        function image11() {
+            var img = document.createElement("img");
+            img.src = "./end.gif";
+            var src = document.getElementById("end");
+            src.appendChild(img);
+        }
+
+
+        var posY = 640;
+        var posB = -200;
+        var posShotY = 90;
+        var hasShot = false;
+        var posAlien = 10;
+        function moveTankRight() {
+            if (window.innerWidth > posY) {
+                posY += 10;
+                console.log(posY);
+                document.getElementById('tank').style.left = `${posY}px`;
+            }
+            else {
+                var audio = new Audio('./error.mp3');
+                audio.play();
+            }
+        }
+        function moveTankLeft() {
+            if (posY > 50) {
+                posY -= 10;
+                console.log(posY);
+                document.getElementById('tank').style.left = `${posY}px`;
+            }
+            else {
+                var audio = new Audio('./error.mp3');
+                audio.play();
+            }
+        }
+        function moveBackground() {
+            posB -= 1;
+            document.body.style.backgroundPositionY = `${posB}%`
+        }
+
+        var start = true;
+        var move1 = true;
+        var move2 = false;
+        var counter = 0;
+        async function moveAliens() {
+            if (start) await sleep(10000);
+            if (move1) {
+                start = false;
+                posAlien += 4;
+                document.getElementById("alien1").style.left = `${posAlien}px`;
+                document.getElementById("alien1").style.top = `${posAlien}px`;
+                document.getElementById("alien2").style.left = `${posAlien + 100}px`;
+                document.getElementById("alien2").style.top = `${posAlien}px`;
+                document.getElementById("alien3").style.left = `${posAlien + 200}px`;
+                document.getElementById("alien3").style.top = `${posAlien}px`;
+                document.getElementById("alien4").style.left = `${posAlien + 300}px`;
+                document.getElementById("alien4").style.top = `${posAlien}px`;
+                document.getElementById("alien5").style.left = `${posAlien + 400}px`;
+                document.getElementById("alien5").style.top = `${posAlien}px`;
+                document.getElementById("alien6").style.left = `${posAlien + 500}px`;
+                document.getElementById("alien6").style.top = `${posAlien}px`;
+                if (window.innerWidth < (posAlien + 500)) document.getElementById("alien6").style.display = "none";
+                if (window.innerWidth < (posAlien + 400)) document.getElementById("alien5").style.display = "none";
+                if (window.innerWidth < (posAlien + 300)) document.getElementById("alien4").style.display = "none";
+                if (window.innerWidth < (posAlien + 200)) document.getElementById("alien3").style.display = "none";
+                if (window.innerWidth < (posAlien + 100)) document.getElementById("alien2").style.display = "none";
+                if (window.innerWidth < (posAlien)) document.getElementById("alien1").style.display = "none";
+                if (window.innerHeight < (posAlien)) {
+                    document.getElementById("alien6").style.display = "none";
+                    document.getElementById("alien5").style.display = "none";
+                    document.getElementById("alien4").style.display = "none";
+                    document.getElementById("alien3").style.display = "none";
+                    document.getElementById("alien2").style.display = "none";
+                    document.getElementById("alien1").style.display = "none";
+                }
+            } else if (!move1) {
+                document.getElementById("alien6").style.display = "none";
+                document.getElementById("alien5").style.display = "none";
+                document.getElementById("alien4").style.display = "none";
+                document.getElementById("alien3").style.display = "none";
+                document.getElementById("alien2").style.display = "none";
+                document.getElementById("alien1").style.display = "none";
+            }
+        }
+
+        var counter2 = 0;
+        var posAlien2 = 10;
+        function moveAliens2() {
+            if (move2) {
+                posAlien2 += 4;
+                document.getElementById("alien7").style.left = `${200}px`;
+                document.getElementById("alien7").style.top = `${posAlien2}px`;
+                document.getElementById("alien8").style.left = `${400}px`;
+                document.getElementById("alien8").style.top = `${posAlien2}px`;
+                document.getElementById("alien9").style.left = `${800}px`;
+                document.getElementById("alien9").style.top = `${posAlien2}px`;
+                if (window.innerHeight < (posAlien2)) {
+                    document.getElementById("alien7").style.display = "none";
+                    document.getElementById("alien8").style.display = "none";
+                    document.getElementById("alien9").style.display = "none";
+                }
+            }
+        }
+        var posAlienBoss = 10;
+        var StartBossFight = true;
+        var BossLive = 20;
+        async function moveAlienBoss() {
+            if (!move1 && !move2) {
+                if (StartBossFight) {
+                    var audio = new Audio('./Boss.mp3');
+                    audio.play();
+                    StartBossFight = false;
+                }
+                
+                var leftShot = Number(document.getElementById("shot").style.left.replace('px', ''));
+                posAlienBoss += 1;
+                document.getElementById("alienBoss").style.left = `${700}px`;
+                document.getElementById("alienBoss").style.top = `${posAlienBoss}px`;
+                if (BossLive == 0) {
+                    document.getElementById("alienBoss").style.display = "none";
+                    image11();
+                }
+                if (500 < leftShot && 900 > leftShot) {
+                    BossLive -= 1;
+                    console.log("Vida jefe: " + BossLive);
+                }
+            }
+        }
+
+        function shot() {
+            hasShot = true;
+            document.getElementById('shot').style.left = document.getElementById('tank').style.left;
+            var audio = new Audio('https://trekcore.com/audio/weapons/tos_photon_torpedo.mp3');
+            audio.play();
+
+
+            var left9 = Number(document.getElementById("alien9").style.left.replace('px', ''));
+            var left8 = Number(document.getElementById("alien8").style.left.replace('px', ''));
+            var left7 = Number(document.getElementById("alien7").style.left.replace('px', ''));
+            var left6 = Number(document.getElementById("alien6").style.left.replace('px', ''));
+            var left5 = Number(document.getElementById("alien5").style.left.replace('px', ''));
+            var left4 = Number(document.getElementById("alien4").style.left.replace('px', ''));
+            var left3 = Number(document.getElementById("alien3").style.left.replace('px', ''));
+            var left2 = Number(document.getElementById("alien2").style.left.replace('px', ''));
+            var left1 = Number(document.getElementById("alien1").style.left.replace('px', ''));
+            var leftShot = Number(document.getElementById("shot").style.left.replace('px', ''));
+            if ((left9 - 30) < leftShot && (left9 + 30) > leftShot) {
+                document.getElementById("alien9").style.display = "none";
+            }
+            if ((left8 - 30) < leftShot && (left8 + 30) > leftShot) {
+                document.getElementById("alien8").style.display = "none";
+            }
+            if ((left7 - 30) < leftShot && (left7 + 30) > leftShot) {
+                document.getElementById("alien7").style.display = "none";
+            }
+            if ((left6 - 50) < leftShot && (left6 + 50) > leftShot) {
+                document.getElementById("alien6").style.display = "none";
+            }
+            if ((left5 - 50) < leftShot && (left5 + 50) > leftShot) {
+                document.getElementById("alien5").style.display = "none";
+            }
+            if ((left4 - 50) < leftShot && (left4 + 50) > leftShot) {
+                document.getElementById("alien4").style.display = "none";
+            }
+            if ((left3 - 50) < leftShot && (left3 + 50) > leftShot) {
+                document.getElementById("alien3").style.display = "none";
+            }
+            if ((left2 - 50) < leftShot && (left2 + 50) > leftShot) {
+                document.getElementById("alien2").style.display = "none";
+            }
+            if ((left1 - 50) < leftShot && (left1 + 50) > leftShot) {
+                document.getElementById("alien1").style.display = "none";
+            }
+
+
+            if (document.getElementById("alien1").style.display == "none" &&
+                document.getElementById("alien2").style.display == "none" &&
+                document.getElementById("alien3").style.display == "none" &&
+                document.getElementById("alien4").style.display == "none" &&
+                document.getElementById("alien5").style.display == "none" &&
+                document.getElementById("alien6").style.display == "none") {
+                console.log("Todos muertos");
+                if (move1) {
+                    document.getElementById("alien6").style.display = "block";
+                    document.getElementById("alien5").style.display = "block";
+                    document.getElementById("alien4").style.display = "block";
+                    document.getElementById("alien3").style.display = "block";
+                    document.getElementById("alien2").style.display = "block";
+                    document.getElementById("alien1").style.display = "block";
+                }
+
+                posAlien = 10;
+                counter++;
+                if (counter == 3) {
+                    move1 = false;
+
+                    move2 = true;
+                }
+            }
+            if (document.getElementById("alien1").style.display == "none" &&
+                document.getElementById("alien2").style.display == "none" &&
+                document.getElementById("alien3").style.display == "none" &&
+                document.getElementById("alien4").style.display == "none" &&
+                document.getElementById("alien5").style.display == "none" &&
+                document.getElementById("alien6").style.display == "none" &&
+                document.getElementById("alien7").style.display == "none" &&
+                document.getElementById("alien8").style.display == "none" &&
+                document.getElementById("alien9").style.display == "none") {
+                console.log("Todos muertos 2");
+                if (move2) {
+                    document.getElementById("alien7").style.display = "block";
+                    document.getElementById("alien8").style.display = "block";
+                    document.getElementById("alien9").style.display = "block";
+                }
+                posAlien2 = 10;
+                counter2++;
+                if (counter2 == 3) {
+                    move2 = false;
+                    document.getElementById("alien7").style.display = "none";
+                    document.getElementById("alien8").style.display = "none";
+                    document.getElementById("alien9").style.display = "none";
+                }
+            }
+        }
+        function keepshot() {
+            if (posShotY < -20) {
+                hasShot = false;
+                posShotY = 90;
+                document.getElementById("shot").style.left = 0;
+            }
+            if (hasShot) {
+                posShotY -= 20;
+                document.getElementById('shot').style.top = `${posShotY}%`
+            }
+
+        }
+        function backgroundMusic() {
+            var audio = new Audio('./background.mp3');
+            audio.play();
+            console.log("Reproduciendo");
+        }
+
+        window.addEventListener("keydown", function (event) {
+            console.log(event.keyCode);
+
+            if (event.keyCode == 39) moveTankRight();
+            if (event.keyCode == 37) moveTankLeft();
+            if (event.keyCode == 32) shot();
+            if (event.keyCode == 68) {
+                move2 = false; move1 = false;
+            }
+        }, true);
+
+    </script>
+
+    <style>
+        div1 {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 90%;
+            left: 640px;
+            margin: -25px 0 0 -25px;
+        }
+
+        div2 {
+            position: absolute;
+            transform: translate(-300%, -100%);
+            width: 10px;
+            height: 60px;
+            top: 30%;
+            background-color: #fabada;
+        }
+
+        div3 {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            left: 10px;
+        }
+
+        div4 {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            left: 50px;
+        }
+
+        div5 {
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+
+        div6 {
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+
+        div7 {
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+
+        div8 {
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+
+        div9 {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: -50%;
+        }
+
+        div10 {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: -50%;
+        }
+
+        div11 {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: -50%;
+        }
+
+        div12 {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: -200%;
+        }
+        div13 {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            margin: -25px 0 0 -25px;
+        }
+
+        body {
+            background-image: url("./backgroung.png");
+            background-position-y: -200%;
+            background-position-x: 48%;
+            background-repeat: repeat;
+        }
+    </style>
+</head>
+
+<body onload="image(); image1(); image2(); image3(); image4(); image5(); image6(); image7(); image8(); image9(); image10();
+    setInterval(moveBackground,600); setInterval(keepshot,50); 
+    setInterval(moveAliens,200); 
+    setInterval(moveAliens2,200);
+    setInterval(moveAlienBoss,200);
+    setTimeout(backgroundMusic,2000);">
+
+    <div1 id="tank"></div1>
+
+    <div2 id="shot"></div2>
+
+    <div3 id="alien1"></div3>
+    <div4 id="alien2"></div4>
+    <div5 id="alien3"></div5>
+    <div6 id="alien4"></div6>
+    <div7 id="alien5"></div7>
+    <div8 id="alien6"></div8>
+
+    <div9 id="alien7"></div9>
+    <div10 id="alien8"></div10>
+    <div11 id="alien9"></div11>
+
+    <div12 id="alienBoss"></div12>
+
+    <div13 id="end"></div13>
+
+</body>
+
+</HtML>
